@@ -1,6 +1,6 @@
 <template>
   <footer
-    class="text-center mt-5 text-lg-start bg-dark text-muted text-light fixed-bottom"
+    class="text-center mt-5 text-lg-start bg-dark text-muted text-light"
   >
     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05)">
       © 2022: <a href="https://swiftype.com/documentation/site-search/overview">Swiftype </a>
