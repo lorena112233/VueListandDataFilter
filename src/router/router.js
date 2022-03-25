@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
-import TestingPage from "../views/TestPage.vue";
+// import TestingPage from "../views/TestPage.vue";
 
 const routes = [
   {
@@ -8,12 +8,13 @@ const routes = [
     name: "Home",
     component: Home,
   },
-  {
-    path: "/testing",
-    name: "Testing",
-    component: TestingPage,
-    // meta: { layout: "AuthLayout", authorize: true, policy: "" },
-  },
+  // -- TODO -- 
+  // {
+  //   path: "/testing",
+  //   name: "Testing",
+  //   component: TestingPage,
+  //   meta: { layout: "AuthLayout", authorize: true, policy: "" },
+  // },
   {
     path: "/about",
     name: "About",

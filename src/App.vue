@@ -13,7 +13,7 @@
 
 <template>
   <div id="">
-    <section class="container-fluid" style="margin-top: 80px;">
+    <section class="container-fluid" style="margin-top: 80px">
       <!-- Bar containing all sort inputs -->
       <div class="row" id="sort-bar">
         <div class="col-md-6">
@@ -32,7 +32,7 @@
         >
           <!-- <label for="select">Choose a car:</label> -->
           <select
-            class="form-control col-6"
+            class="form-control col-6 text-right"
             name="sortBy"
             id="select"
             v-model="sortBy"
@@ -40,17 +40,23 @@
             <option value="byName">Sort By Name</option>
             <option value="bySpecialty">Sort By Specialty</option>
           </select>
-          <button
+          <button-custom
+            v-on:click="ascending = !ascending"
+            class="btn btn-primary sort-button col-2"
+            type="outline"
+          >
+            <i v-if="ascending" class="fa fa-sort-up">Z-A</i>
+            <i v-else class="fa fa-sort-down">A-Z</i></button-custom
+          >
+          <!-- <button
             v-on:click="ascending = !ascending"
             class="btn btn-primary sort-button col-2"
           >
             A-Z
             <i v-if="ascending" class="fa fa-sort-up"></i>
             <i v-else class="fa fa-sort-down"></i>
-          </button>
+          </button> -->
         </div>
-
-        <!-- <input type="number" v-model="maxCookingTime" id="cooking-time-input" /> -->
       </div>
 
       <!-- Where the array of recipes get rendered as cards -->
@@ -87,7 +93,7 @@
               <div v-else class="col-lg-5 col-md-6" style="text-align: left">
                 <img
                   src="./assets/null.png"
-                  class="card-img-top profilePicture"
+                  class="card-img-top profilePictureEmpty"
                   style="border: none"
                 />
               </div>
@@ -95,9 +101,8 @@
               <!-- Specialties -->
               <div class="col-lg-7 col-md-6" style="text-align: left">
                 <div class="specialtiesContainer">
-                  <h5>Specialties</h5>
-
                   <div v-if="Array.isArray(consultant.specialties)">
+                    <h5>Specialties</h5>
                     <p
                       v-for="(val, index) in consultant.specialties"
                       :key="index"
@@ -108,6 +113,7 @@
                   </div>
 
                   <div v-else-if="consultant.specialties">
+                    <h5>Specialties</h5>
                     <p>
                       <img class="icon" src="./assets/first-aid-kit.png" />
                       {{ consultant.specialties }}
@@ -158,7 +164,6 @@
                   >Book</button-custom
                 >
               </div>
-              <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
             </div>
             <div class="card-footer text-muted">
               Last Updated:&nbsp;{{ consultant.updated_at.split("T")[0] }}
@@ -182,11 +187,9 @@ export default {
   data() {
     return {
       items: [],
-      items2: [],
+
       items_count: 0,
-      info: [],
-      errors: [],
-      myItems: {},
+
       selectedSettingName: "",
       enteredSearchName: "",
       enteredSearchGroup: "",
@@ -201,11 +204,9 @@ export default {
   },
   methods: {
     async getDataAction() {
-      console.log("1 - this.items", this.items);
       const response = await APITestServ.getTestByID();
-      console.log("response  //   ", response);
+
       this.items = response.data.Data;
-      console.log("2 - items  //   ", this.items[0]);
     },
   },
   created() {
@@ -231,45 +232,6 @@ export default {
 
         this.items_count = data.record_count;
         this.items = data.records.page;
-        // this.myItems = data.records.page.specialties;
-
-        for (var i = 0; i < this.items_count; i++) {
-          var specialties = this.items[i].specialties;
-          var hasSpecialties = [];
-
-          if (specialties == null) {
-            // your code here.
-            specialties = hasSpecialties;
-          } else {
-            if (specialties[0].length == 1) {
-              hasSpecialties.push({
-                specialties,
-              });
-            } else {
-              hasSpecialties = specialties;
-            }
-
-            // console.log("specialties ", specialties);
-            // console.log("specialties ", specialties.length);
-            // console.log(specialties[0].length, specialties[0]);
-          }
-
-          this.myItems["ID"] = this.items[i].id;
-          this.myItems["Specialties"] = hasSpecialties;
-          this.myItems["LastUpdated"] = this.items[i].updated_at.split("T")[0];
-          this.items2.push(this.myItems);
-
-          // this.myItems.push({
-          //   Id: this.items[i].id,
-          //   Specialties: hasSpecialties,
-          //   LastUpdated: this.items[i].updated_at.split("T")[0]
-          // });
-        }
-
-        console.log("--- DATA  ---", data);
-        console.log("---this.items ---", this.items);
-        console.log("---this.2 ---", this.items2);
-        console.log("---New Array (myItems) ---", this.myItems);
       })
       .catch((error) => {
         this.errorMessage = error;
@@ -332,6 +294,9 @@ export default {
 
 
 <style>
+#select {
+  text-align: right;
+}
 #results-container div.card.mb-1 {
   border-color: transparent;
 }
@@ -360,6 +325,11 @@ img.icon {
   max-height: 100%;
   background-repeat: no-repeat;
   background-size: contain;
+}
+img.profilePictureEmpty {
+  padding: 5px;
+  max-height: 150px;
+  max-width: 150px;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
