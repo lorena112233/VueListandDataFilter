@@ -15,7 +15,7 @@
   <div id="">
     <section class="container-fluid" style="margin-top: 80px">
       <!-- Bar containing all sort inputs -->
-      <div class="row" id="sort-bar">
+      <div class="row pt-4" id="sort-bar">
         <div class="col-md-6">
           <input
             type="text"
@@ -26,33 +26,34 @@
           />
           <i class="fa fa-search"></i>
         </div>
-        <div
-          class="col-md-5 container-fluid d-inline-flex row pb-2"
-          style="flex-flow: row"
-        >
-          <select
-            class="form-control col-6 text-right"
-            name="sortBy"
-            id="select"
-            v-model="sortBy"
-          >
-            <option value="byName">Sort By Name</option>
-            <option value="bySpecialty">Sort By Specialty</option>
-          </select>
-          <button-custom
-            v-on:click="ascending = !ascending"
-            class="btn btn-primary sort-button col-2"
-            type="outline"
-          >
-            <i v-if="ascending" class="fa fa-sort-up">Z-A</i>
-            <i v-else class="fa fa-sort-down">A-Z</i></button-custom
-          >
+        <div class="container-fluid p-4">
+          <div class="row col-md-6">
+            <select
+              class="col-md-6 form-control"
+              name="sortBy"
+              id="select"
+              v-model="sortBy"
+            >
+              <option value="byName">Sort By Name</option>
+              <option value="bySpecialty">Sort By Specialty</option>
+            </select>
+          </div>
+          <div class="row col-md-6 pt-2">
+            <button-custom
+              v-on:click="ascending = !ascending"
+              class="btn btn-primary sort-button col-2"
+              type="outline"
+            >
+              <i v-if="ascending" class="fa fa-sort-up">Z-A</i>
+              <i v-else class="fa fa-sort-down">A-Z</i></button-custom
+            >
+          </div>
         </div>
       </div>
 
       <!-- Display DATA: array of consultants get rendered as cards -->
       <div id="results-container" class="row">
-        <h2 class="header mt-3 mb-3 text-left">
+        <h2 class="header mt-4 mb-4">
           Results: {{ filteredConsultants.length }}
         </h2>
         <div
@@ -148,12 +149,6 @@
                 </div>
               </div>
 
-              <!-- 
-      v-if="
-                  consultant.image !=
-                  'https://www.nuffieldhealth.com/_image/thumbnail/240x250%5E/?url='
-                " -->
-
               <div
                 v-if="consultant.bookable != 'false'"
                 class="row w-100 pt-1"
@@ -193,7 +188,7 @@ export default {
       enteredSearchName: "",
       enteredSearchGroup: "",
       settings: [],
-      // Show or hide update form
+
       formUpdate: false,
       // -------------
       ascending: true,
@@ -209,15 +204,9 @@ export default {
     },
   },
   created() {
-    // this.getDataAction();
-    // fetch('https://search-api.swiftype.com/api/v1/public/engines/search.json?engine_key=sR_cCweEaptts3ExMPzv&page=1&per_page=20')
-    // .then(res => res.json())
-    // .then(data => this.items = data)
-    // .catch(err => console.log(err.message))
-
     // GET request using fetch with error handling
     fetch(
-      "https://search-api.swiftype.com/api/v1/public/engines/search.json?engine_key=sR_cCweEaptts3ExMPzv&page=1&per_page=20"
+      "https://search-api.swiftype.com/api/v1/public/engines/search.json?engine_key=sR_cCweEaptts3ExMPzv&page=1&per_page=30"
     )
       .then(async (response) => {
         const data = await response.json();
@@ -231,7 +220,6 @@ export default {
 
         this.items_count = data.record_count;
         this.items = data.records.page;
-
       })
       .catch((error) => {
         this.errorMessage = error;
@@ -296,7 +284,7 @@ export default {
 .text-left {
   text-align: left;
 }
-#select {
+.text-left {
   text-align: right;
 }
 #results-container div.card.mb-1 {
@@ -321,8 +309,6 @@ img.icon {
 
 .profilePicture {
   background-image: url("../src/assets/null.png");
-  /* width: 100px;
-  height: 100px; */
   max-width: 100%;
   max-height: 100%;
   background-repeat: no-repeat;
