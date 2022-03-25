@@ -1,4 +1,7 @@
-# vue-api-test
+# Simple Vue Application
+
+## Description
+A sample application using Vue.js that lists all the consultants in a clean, responsive way.
 
 ## Project setup
 ```
