@@ -206,7 +206,7 @@ export default {
   created() {
     // GET request using fetch with error handling
     fetch(
-      "https://search-api.swiftype.com/api/v1/public/engines/search.json?engine_key=sR_cCweEaptts3ExMPzv&page=1&per_page=30"
+      "https://search-api.swiftype.com/api/v1/public/engines/search.json?engine_key=sR_cCweEaptts3ExMPzv&page=1&per_page=20"
     )
       .then(async (response) => {
         const data = await response.json();
