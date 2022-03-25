@@ -30,7 +30,6 @@
           class="col-md-5 container-fluid d-inline-flex row pb-2"
           style="flex-flow: row"
         >
-          <!-- <label for="select">Choose a car:</label> -->
           <select
             class="form-control col-6 text-right"
             name="sortBy"
@@ -48,20 +47,14 @@
             <i v-if="ascending" class="fa fa-sort-up">Z-A</i>
             <i v-else class="fa fa-sort-down">A-Z</i></button-custom
           >
-          <!-- <button
-            v-on:click="ascending = !ascending"
-            class="btn btn-primary sort-button col-2"
-          >
-            A-Z
-            <i v-if="ascending" class="fa fa-sort-up"></i>
-            <i v-else class="fa fa-sort-down"></i>
-          </button> -->
         </div>
       </div>
 
-      <!-- Where the array of recipes get rendered as cards -->
+      <!-- Display DATA: array of consultants get rendered as cards -->
       <div id="results-container" class="row">
-        <h2 class="header">Results: {{ filteredConsultants.length }}</h2>
+        <h2 class="header mt-3 mb-3 text-left">
+          Results: {{ filteredConsultants.length }}
+        </h2>
         <div
           class="card col-lg-4 col-md-6 mb-1"
           v-for="consultant in filteredConsultants"
@@ -75,7 +68,7 @@
               </h5>
             </div>
 
-            <!-- profile picture -->
+            <!-- profile picture / image -->
             <div class="card-body row">
               <div
                 v-if="
@@ -155,8 +148,14 @@
                 </div>
               </div>
 
+              <!-- 
+      v-if="
+                  consultant.image !=
+                  'https://www.nuffieldhealth.com/_image/thumbnail/240x250%5E/?url='
+                " -->
+
               <div
-                v-if="consultant.bookable"
+                v-if="consultant.bookable != 'false'"
                 class="row w-100 pt-1"
                 style="align-content: flex-end; justify-content: right"
               >
@@ -232,6 +231,7 @@ export default {
 
         this.items_count = data.record_count;
         this.items = data.records.page;
+
       })
       .catch((error) => {
         this.errorMessage = error;
@@ -267,9 +267,8 @@ export default {
 
           // Sort by Specialty
         } else if (this.sortBy == "bySpecialty") {
-          // return a.cookingTime - b.cookingTime;
-          let fa = a.lastname.toLowerCase(),
-            fb = b.lastname.toLowerCase();
+          let fa = a.specialties ? a.specialties : "";
+          let fb = b.specialties ? b.specialties : "";
 
           if (fa < fb) {
             return -1;
@@ -294,6 +293,9 @@ export default {
 
 
 <style>
+.text-left {
+  text-align: left;
+}
 #select {
   text-align: right;
 }
