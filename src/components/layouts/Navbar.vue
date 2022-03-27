@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color:#00a200;">
     <div class="container-fluid">
       <a class="navbar-brand" href="https://www.nuffieldhealth.com/consultants?size=n_20_n&sort-field=sortname&sort-direction=asc"
-        ><img style="border:none; color:white;" alt="navbar" src="../../assets/daily-health-app.png" width="40" height="40"
+        ><img style="border:none; color:white;" alt="navbar" src="../../assets/icons/daily-health-app.png" width="40" height="40"
       /></a>
       <button
         class="navbar-toggler"

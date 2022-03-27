@@ -86,7 +86,7 @@
               </div>
               <div v-else class="col-lg-5 col-md-6" style="text-align: left">
                 <img
-                  src="./assets/null.png"
+                  src="./assets/profilePicDefault.png"
                   class="card-img-top profilePictureEmpty"
                   style="border: none"
                 />
@@ -101,7 +101,7 @@
                       v-for="(val, index) in consultant.specialties"
                       :key="index"
                     >
-                      <img class="icon" src="./assets/first-aid-kit.png" />
+                      <img class="icon" src="./assets/icons/first-aid-kit.png"/>
                       {{ val }}
                     </p>
                   </div>
@@ -109,7 +109,7 @@
                   <div v-else-if="consultant.specialties">
                     <h5>Specialties</h5>
                     <p>
-                      <img class="icon" src="./assets/first-aid-kit.png" />
+                      <img class="icon" src="./assets/icons/first-aid-kit.png" />
                       {{ consultant.specialties }}
                     </p>
                   </div>
@@ -130,7 +130,7 @@
                       v-for="(val, index) in consultant.locations"
                       :key="index"
                     >
-                      <img class="icon" src="./assets/pin.png" />
+                      <img class="icon" src="./assets/icons/pin.png" />
                       <p>{{ val }}</p>
                     </div>
                   </div>
@@ -143,7 +143,7 @@
                     >
                       Locations
                     </h5>
-                    <img class="icon" src="./assets/pin.png" />
+                    <img class="icon" src="./assets/icons/pin.png" />
                     <p>{{ consultant.locations }}</p>
                   </div>
                 </div>
