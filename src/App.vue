@@ -308,7 +308,7 @@ img.icon {
 }
 
 .profilePicture {
-  background-image: url("../src/assets/null.png");
+  background-image: url("../src/assets/profilePicDefault.png");
   max-width: 100%;
   max-height: 100%;
   background-repeat: no-repeat;
