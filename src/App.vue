@@ -61,108 +61,13 @@
           v-for="consultant in filteredConsultants"
           :key="consultant.id"
         >
-          <div class="card h-100">
-            <!-- Title -->
-            <div class="card-header">
-              <h5 class="card-title">
-                {{ consultant.fullname }} ({{ consultant.type }})
-              </h5>
-            </div>
+          <Card :event="consultant" />
 
-            <!-- profile picture / image -->
-            <div class="card-body row">
-              <div
-                v-if="
-                  consultant.image !=
-                  'https://www.nuffieldhealth.com/_image/thumbnail/240x250%5E/?url='
-                "
-                class="col-lg-5 col-md-6"
-                style="text-align: left"
-              >
-                <img
-                  :src="consultant.image"
-                  class="card-img-top profilePicture"
-                />
-              </div>
-              <div v-else class="col-lg-5 col-md-6" style="text-align: left">
-                <img
-                  src="./assets/profilePicDefault.png"
-                  class="card-img-top profilePictureEmpty"
-                  style="border: none"
-                />
-              </div>
-
-              <!-- Specialties -->
-              <div class="col-lg-7 col-md-6" style="text-align: left">
-                <div class="specialtiesContainer">
-                  <div v-if="Array.isArray(consultant.specialties)">
-                    <h5>Specialties</h5>
-                    <p
-                      v-for="(val, index) in consultant.specialties"
-                      :key="index"
-                    >
-                      <img class="icon" src="./assets/icons/first-aid-kit.png"/>
-                      {{ val }}
-                    </p>
-                  </div>
-
-                  <div v-else-if="consultant.specialties">
-                    <h5>Specialties</h5>
-                    <p>
-                      <img class="icon" src="./assets/icons/first-aid-kit.png" />
-                      {{ consultant.specialties }}
-                    </p>
-                  </div>
-                </div>
-
-                <div class="locationsContainer">
-                  <div v-if="Array.isArray(consultant.locations)">
-                    <h5
-                      style="
-                        border-top: lightgrey thin solid;
-                        padding-top: 10px;
-                      "
-                    >
-                      Locations
-                    </h5>
-
-                    <div
-                      v-for="(val, index) in consultant.locations"
-                      :key="index"
-                    >
-                      <img class="icon" src="./assets/icons/pin.png" />
-                      <p>{{ val }}</p>
-                    </div>
-                  </div>
-                  <div v-else-if="consultant.locations">
-                    <h5
-                      style="
-                        border-top: lightgrey thin solid;
-                        padding-top: 10px;
-                      "
-                    >
-                      Locations
-                    </h5>
-                    <img class="icon" src="./assets/icons/pin.png" />
-                    <p>{{ consultant.locations }}</p>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                v-if="consultant.bookable != 'false'"
-                class="row w-100 pt-1"
-                style="align-content: flex-end; justify-content: right"
-              >
-                <button-custom class="col-sm-6" type="outline"
-                  >Book</button-custom
-                >
-              </div>
-            </div>
-            <div class="card-footer text-muted">
-              Last Updated:&nbsp;{{ consultant.updated_at.split("T")[0] }}
-            </div>
-          </div>
+          <!-- <Card
+            v-for="consultant in filteredConsultants"
+            :key="consultant.id"
+            :event="consultant"
+          /> -->
         </div>
       </div>
     </section>
@@ -172,12 +77,13 @@
 </template>
 <script>
 import PubLayout from "./components/layouts/StdLayout";
+import Card from "./components/Card.vue";
 import APITestService from "./services/TestService.js";
 
 const APITestServ = new APITestService();
 export default {
   name: "#app",
-  components: { PubLayout },
+  components: { PubLayout, Card },
   data() {
     return {
       items: [],
@@ -242,8 +148,8 @@ export default {
       // Sort by Fullname: alphabetical order (asc - desc)
       tempConsultants = tempConsultants.sort((a, b) => {
         if (this.sortBy == "byName") {
-          let fa = a.fullname.toLowerCase(),
-            fb = b.fullname.toLowerCase();
+          let fa = a.lastname.toLowerCase(),
+            fb = b.lastname.toLowerCase();
 
           if (fa < fb) {
             return -1;
