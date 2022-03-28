@@ -78,7 +78,7 @@
 <script>
 import PubLayout from "./components/layouts/StdLayout";
 import Card from "./components/Card.vue";
-import APITestService from "./services/TestService.js";
+import APITestService from "./services/Api.js";
 
 const APITestServ = new APITestService();
 export default {
