@@ -12,4 +12,3 @@ app.component('button-custom', Button);
 // createApp(App).use(store).use(router).mount("#app");
 
 app.mount("#app");
-// createApp(App).mount("#app");
