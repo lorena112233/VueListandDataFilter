@@ -66,12 +66,6 @@ export default {
   transition: all 0.3s ease;
 }
 
-.modal-header {
-}
-
-.modal-body {
-}
-
 .modal-footer {
   margin: 0px auto;
 }
