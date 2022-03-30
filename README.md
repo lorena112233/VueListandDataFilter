@@ -7,12 +7,15 @@ A sample application using Vue.js that lists all the consultants in a clean, res
 Responsive. Using similar colours as on the website.
 
 ## TO-DO
+- Include Specialties when filtering by text
 - Pagination
-- Router
 - Components (Each Card into Components)
+- - Use different icon depending on Specialties
+- - Booking Form
+- - Link location to maps (onClick)
+- Router (+Views)
 - Views: 
 - - Consultant-Details (+ availability calendar)
-- - Booking Form
 
 
 ## Project setup
