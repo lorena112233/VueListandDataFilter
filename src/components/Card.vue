@@ -1,4 +1,18 @@
 <template>
+  <ModalComponent
+    :showModal="showModalBooking"
+    :modalHeader="modalHeader"
+    @close="showModalBooking = false"
+  >
+    <template v-slot:body>
+      <div class="mb-3">To-Do</div>
+    </template>
+
+    <template v-slot:footer>
+      <!-- <button type="button" class="btn btn-primary">Add</button> -->
+    </template>
+  </ModalComponent>
+
   <!-- Link to profile details  -->
   <!-- <router-link
 		class="event-link"
@@ -23,12 +37,16 @@
           event.image !=
           'https://www.nuffieldhealth.com/_image/thumbnail/240x250%5E/?url='
         "
-        class="col-lg-5 col-md-6"
+        class="col-lg-5 col-sm-6 img-container-profile"
         style="text-align: left"
       >
         <img :src="event.image" class="card-img-top profilePicture" />
       </div>
-      <div v-else class="col-lg-5 col-md-6" style="text-align: left">
+      <div
+        v-else
+        class="col-lg-5 col-sm-6 img-container-profile"
+        style="text-align: left"
+      >
         <img
           src="../assets/profilePicDefault.png"
           class="card-img-top profilePictureEmpty"
@@ -36,8 +54,8 @@
         />
       </div>
 
-      <!-- 1.2.2 Col(2) - img container -->
-      <div class="col-lg-7 col-md-6" style="text-align: left">
+      <!-- 1.2.2 Col(2) - Text container -->
+      <div class="col-lg-7 col-sm-6 body-container" style="text-align: left">
         <!-- 1.2.2.1 Specialties -->
         <div class="specialtiesContainer">
           <div v-if="Array.isArray(event.specialties)">
@@ -85,7 +103,9 @@
         class="row w-100 pt-1"
         style="align-content: flex-end; justify-content: right"
       >
-        <button-custom class="col-sm-6" type="outline">Book</button-custom>
+        <button-custom class="col-sm-6" type="outline" @click="showModal()"
+          >Book</button-custom
+        >
       </div>
     </div>
 
@@ -98,7 +118,11 @@
 </template>
 
 <script>
+import ModalComponent from "./Modal.vue";
 export default {
+  components: {
+    ModalComponent,
+  },
   props: {
     event: {
       type: Object,
@@ -107,9 +131,65 @@ export default {
   },
   data() {
     return {
+      showModalBooking: false,
+      modalHeader: "",
       status: this.event,
     };
+  },
+  methods: {
+    showModal() {
+      console.log(this.event);
+      this.modalHeader = this.event.fullname;
+
+      this.showModalBooking = true;
+    },
+    closeModal() {
+      this.showModalBooking = false;
+    },
   },
   computed: {},
 };
 </script>
+
+<style scoped>
+img {
+  border: solid 6px #005c6b;
+  max-width: 250px;
+}
+
+img.icon {
+  margin: 6px;
+  height: 25px;
+  width: 25px;
+  border: none;
+}
+.card-img-top {
+  width: 100%;
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+}
+.img-container-profile {
+  max-width: 250px;
+}
+.profilePicture {
+  background-image: url("../../src/assets/profilePicDefault.png");
+  max-width: 100%;
+  max-height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+img.profilePictureEmpty {
+  padding: 5px;
+  max-height: 150px;
+  max-width: 150px;
+}
+@media only screen and (max-width: 767px) {
+  .img-container-profile {
+    padding-bottom: 10px;
+    width: 150px;
+  }
+  .body-container {
+    width: 250px;
+  }
+}
+</style>

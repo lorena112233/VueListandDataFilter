@@ -13,8 +13,11 @@
 
 <template>
   <div id="">
+    
     <section class="container-fluid" style="margin-top: 80px">
       <!-- Bar containing all sort inputs -->
+      <!-- TODO -->
+      <!-- <Filters :event="this.items" /> -->
       <div class="row pt-4" id="sort-bar">
         <div class="col-md-6">
           <input
@@ -63,11 +66,7 @@
         >
           <Card :event="consultant" />
 
-          <!-- <Card
-            v-for="consultant in filteredConsultants"
-            :key="consultant.id"
-            :event="consultant"
-          /> -->
+
         </div>
       </div>
     </section>
@@ -77,6 +76,7 @@
 </template>
 <script>
 import PubLayout from "./components/layouts/StdLayout";
+// import Filters from "./components/Filters.vue";
 import Card from "./components/Card.vue";
 import APITestService from "./services/Api.js";
 
@@ -89,11 +89,6 @@ export default {
       items: [],
 
       items_count: 0,
-
-      selectedSettingName: "",
-      enteredSearchName: "",
-      enteredSearchGroup: "",
-      settings: [],
 
       formUpdate: false,
       // -------------
@@ -138,6 +133,7 @@ export default {
 
       // Process search input
       if (this.searchValue != "" && this.searchValue) {
+        
         tempConsultants = tempConsultants.filter((item) => {
           return item.fullname
             .toUpperCase()
@@ -202,29 +198,8 @@ export default {
 .card-body.row {
   min-height: 250px;
 }
-img {
-  border: solid 6px #005c6b;
-}
 
-img.icon {
-  margin: 6px;
-  height: 25px;
-  width: 25px;
-  border: none;
-}
 
-.profilePicture {
-  background-image: url("../src/assets/profilePicDefault.png");
-  max-width: 100%;
-  max-height: 100%;
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-img.profilePictureEmpty {
-  padding: 5px;
-  max-height: 150px;
-  max-width: 150px;
-}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -246,13 +221,4 @@ img.profilePictureEmpty {
   color: #42b983;
 }
 
-.card-img-top {
-  width: 100%;
-  border-top-left-radius: calc(0.25rem - 1px);
-  border-top-right-radius: calc(0.25rem - 1px);
-}
-
-img {
-  max-width: 250px;
-}
 </style>
