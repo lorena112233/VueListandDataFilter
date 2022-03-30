@@ -3,6 +3,19 @@
 ## Description
 A sample application using Vue.js that lists all the consultants in a clean, responsive way.
 
+### Desgin
+Responsive. Using similar colours as on the website.
+
+## TO-DO
+[] Pagination
+[] Router
+Components
+- [] Split Each Card into Components
+Views: 
+- [] Consultant-Details(including availability calendar)
+- [] Booking Form
+
+
 ## Project setup
 ```
 npm install
